@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-version = "0.0.2"
+version = "0.0.3"
 
 try:
     import fastentrypoints
@@ -9,7 +9,7 @@ except ImportError:
     import pkg_resources
     easy_install.main(['fastentrypoints'])
     pkg_resources.require('fastentrypoints')
-    import fastentrypoint
+    import fastentrypoints
 
 import sys
 try:
