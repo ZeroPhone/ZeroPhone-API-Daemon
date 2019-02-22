@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-version = "0.0.5"
+version = "0.0.6"
 
 try:
     import fastentrypoints
@@ -12,15 +12,12 @@ except ImportError:
     import fastentrypoints
 
 import sys
-try:
-    from setuptools import setup
-except ImportError:
-    from distutils.core import setup
+from setuptools import setup, find_packages
 
 
 if sys.version_info[0] == 2:
     jsonrpclib = "jsonrpclib"
-    ep = {"console_scripts": ["zerophone_api_daemon = zerophone_api_daemon:main"]}
+    ep = {"console_scripts": ["zerophone_api_daemon = zerophone_api_daemon.zerophone_api_daemon:main"]}
 elif sys.version_info[0] == 3:
     jsonrpclib = "jsonrpclib-pelix"
     ep = {}
@@ -28,7 +25,7 @@ elif sys.version_info[0] == 3:
 
 setup(
     name='zerophone_api_daemon',
-    py_modules=['zerophone_api_daemon'],
+    packages=find_packages(),
     version=version,
     description='ZeroPhone API daemon',
     author='CRImier',
