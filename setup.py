@@ -37,8 +37,8 @@ setup(
         "PyRIC",
         "zerophone_hw"
     ],
-    #url = 'https://github.com/ZeroPhone/Zerophone-API-Python',
-    #download_url = 'https://github.com/ZeroPhone/zerophone-api-py/archive/{}.tar.gz'.format(version),
+    url = 'https://github.com/ZeroPhone/Zerophone-API-Daemon',
+    download_url = 'https://github.com/ZeroPhone/Zerophone-API-Daemon/archive/{}.tar.gz'.format(version),
     entry_points={"console_scripts": ["zerophone_api_daemon = daemon:main"]}
 )
 import sys
