@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-version = "0.0.4"
+version = "0.0.5"
 
 try:
     import fastentrypoints
@@ -18,11 +18,12 @@ except ImportError:
     from distutils.core import setup
 
 
-
 if sys.version_info[0] == 2:
     jsonrpclib = "jsonrpclib"
+    ep = {"console_scripts": ["zerophone_api_daemon = zerophone_api_daemon:main"]}
 elif sys.version_info[0] == 3:
     jsonrpclib = "jsonrpclib-pelix"
+    ep = {}
 
 
 setup(
@@ -39,7 +40,7 @@ setup(
     ],
     url = 'https://github.com/ZeroPhone/Zerophone-API-Daemon',
     download_url = 'https://github.com/ZeroPhone/Zerophone-API-Daemon/archive/{}.tar.gz'.format(version),
-    entry_points={"console_scripts": ["zerophone_api_daemon = daemon:main"]}
+    entry_points=ep
 )
 import sys
 
