@@ -20,3 +20,14 @@ class ThrottledSource(object):
             self.value = self.cb()
             self.time = time()
         return self.value
+
+class ConstantSource(object):
+
+    def __init__(self, callback):
+        self.cb = callback
+        self.value = UnassignedValue()
+
+    def get(self):
+        if isinstance(self.value, UnassignedValue):
+            self.value = self.cb()
+        return self.value

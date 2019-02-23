@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-version = "0.0.6"
+version = "0.1.0"
 
 try:
     import fastentrypoints
@@ -33,7 +33,7 @@ setup(
     install_requires=[
         jsonrpclib,
         "PyRIC",
-        "zerophone_hw"
+        "zerophone_hw >= 0.4.0"
     ],
     url = 'https://github.com/ZeroPhone/Zerophone-API-Daemon',
     download_url = 'https://github.com/ZeroPhone/Zerophone-API-Daemon/archive/{}.tar.gz'.format(version),

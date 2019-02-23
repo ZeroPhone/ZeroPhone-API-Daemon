@@ -7,16 +7,18 @@ from pyric import pyw
 
 # Local imports
 from rpc_api import RPCApi
-from sources import ThrottledSource
+from sources import ThrottledSource, ConstantSource
 
 # API version, kind-of-semver
-api_version = (0,0,1)
+api_version = (0,1,0)
 
 api = RPCApi({"rpc_port":9376, "rpc_host":"127.0.0.1"})
 
-
-dcdc = zerophone_hw.USB_DCDC()
-led = zerophone_hw.RGB_LED()
+version = zerophone_hw.hw_version
+dcdc = None
+led = None
+charger = None
+modem = None
 
 def register_with(api, aliases=[], name=None):
     def decorator(f):
@@ -27,6 +29,16 @@ def register_with(api, aliases=[], name=None):
 @register_with(api, name="api_version")
 def get_api_version():
     return api_version
+
+@register_with(api, name="recreate_objects")
+def setup_objects():
+    global dcdc, led, charger, modem
+    dcdc = zerophone_hw.USB_DCDC()
+    led = zerophone_hw.RGB_LED()
+    charger = zerophone_hw.Charger()
+    modem = zerophone_hw.GSM_Modem()
+
+setup_objects()
 
 # USB DC-DC functions
 
@@ -55,6 +67,22 @@ def dcdc(state=None):
         else:
             return turn_dcdc_off()
 """
+
+# Hardware info functions
+
+@register_with(api)
+def get_board_version():
+    return version.string()
+
+@register_with(api)
+def get_hwlib_version():
+    return version.library()
+
+serial_s = ConstantSource(version.get_serial)
+
+@register_with(api)
+def cpu_serial():
+    return serial_s.get()
 
 # WiFi functions
 
@@ -142,7 +170,7 @@ def set_led_rgb(r, g, b):
 
 @register_with(api)
 def charger_connected():
-    return zerophone_hw.is_charging()
+    return charger.connected()
 
 """ Not implemented in software yet
 
