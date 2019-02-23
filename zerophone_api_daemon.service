@@ -1,0 +1,12 @@
+[Unit]
+Description=ZeroPhone API daemon
+
+[Service]
+User=root
+Group=root
+PIDFile=/run/zp_api_daemon.pid
+ExecStart=/usr/local/bin/zerophone_api_daemon
+Restart=always
+
+[Install]
+WantedBy=getty.target
